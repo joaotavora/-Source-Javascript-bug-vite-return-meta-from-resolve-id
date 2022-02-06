@@ -7,7 +7,11 @@ export default {
                 let [file, query] = id.split('?');
                 const probe = query && query.match(/xoption=([^&]+)/)
                 const x = probe && Number(probe[1])
-                if (x) return {id: path.resolve(file), meta: {x}}
+                if (x) {
+                    const realone = path.resolve(file);
+                    console.log('IS THIS FILE REAL ON THE FS?', realone);
+                    return {id: realone, meta: {x}}
+                }
             },
             async transform(blob, id) {
                 const x = this.getModuleInfo(id)?.meta?.x
